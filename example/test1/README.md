@@ -63,3 +63,14 @@ E220 e220(0xFF,0xFF,0x00);
     ChangeChannel(uint8_t _channel); 
     ```
 
+#### Generate test messages
+- generate test messages
+```
+void E220::GenerateTestMsg(byte* _payload, int count) {
+    for (int i = 0; i < 49; i++) {
+        _payload[i] = 0x43 + count;
+    }
+}
+``` 
+
+

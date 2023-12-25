@@ -30,7 +30,7 @@ void loop() {
     Rxlength=e220.ReceiveData(rx_payload,&rssi);
     Serial.write(rx_payload,Rxlength);
     Serial.println();
-    Serial.print("RSSI:");
+    Serial.print("RSSI[dBm]:");
     Serial.println(rssi);
     delay(10);
     e220.ResetBuff(rx_payload);
