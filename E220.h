@@ -9,8 +9,6 @@ class E220{
         void GenerateTestMsg(byte* _payload, int count);
         void GenerateTestMsg_2(byte* _payload, int count,int _length);
         void TransmissionData(byte* _tx_payload);
-        void ChangeChannel(uint8_t _channel);
-        void ChangeTargetAddress(uint8_t _target_adress1, uint8_t _target_adress2);
         int ReceiveData(byte* _rx_payload);
         int ReceiveData(byte* _rx_payload,int* rssi);
     private:
