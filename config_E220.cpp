@@ -104,6 +104,10 @@ void config_E220::Show(){
     byte responcedata[11]={0};
     ReadResister(0x00,11,responcedata);
     Serial.println("------configuration------");
+    Serial.print("Address:");
+    Serial.print(responcedata[0],HEX);
+    Serial.println(responcedata[1],HEX);
+
 
     Serial.print("UARTBaudrate:");
     Serial.print(uart_baudrate[(int)((responcedata[2]&0b11100000)>>5)]);
@@ -155,6 +159,20 @@ void config_E220::Show(){
     Serial.println("ms");
 
     Serial.println("-------------------------");
+}
+
+//Address=0x00,0x01
+void config_E220::SetAddress(int _addr,byte* _set_data_buff){
+    if(_addr<0){
+        // Serial.print("error:address<0");
+    }else if(_addr<256){
+        _set_data_buff[0]=_addr;
+    }else if(_addr<65536){
+        _set_data_buff[0]=_addr/256;
+        _set_data_buff[1]=_addr%256;
+    }else{
+        // Serial.print("error:address>65535");
+    }
 }
 
 //Address=0x02

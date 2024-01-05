@@ -32,6 +32,17 @@ void loop(){
     if(serial_input.equals("show")>0){
         e220conf.Show();
     }
+    //address command
+    if(serial_input.startsWith("address ")){
+        int spaceIndex = serial_input.indexOf(' ');
+        String addressStr = serial_input.substring(spaceIndex + 1);
+        int address = addressStr.toInt();
+        e220conf.SetAddress(address, set_data_buff);
+        byte w_data_buff[2];
+        w_data_buff[0]=set_data_buff[0];
+        w_data_buff[1]=set_data_buff[1];
+        e220conf.WriteResister(0x00, 0x02,w_data_buff);
+    }
     //bandrate command
     if(serial_input.startsWith("baudrate ")){
         int spaceIndex = serial_input.indexOf(' ');
