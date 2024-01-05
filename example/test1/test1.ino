@@ -4,8 +4,8 @@
 
 int count=0;//for test message
 
-byte tx_payload[48]={0};
-byte rx_payload[48]={0};
+byte tx_payload[199]={0};
+byte rx_payload[199]={0};
 
 E220 e220(0xFF,0xFF,0x00);//TARGETADRESS=0xFFFF,CHANNEL=0x00
 
@@ -24,7 +24,7 @@ void loop() {
     }
     count++;
     int Rxlength=0;
-    e220.GenerateTestMsg_2(tx_payload, count,49);
+    e220.GenerateTestMsg_2(tx_payload, count,199);
     e220.TransmissionData(tx_payload);
     Rxlength=e220.ReceiveData(rx_payload);
     Serial.write(rx_payload,Rxlength);

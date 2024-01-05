@@ -106,7 +106,7 @@ void config_E220::Show(){
     Serial.println("------configuration------");
 
     Serial.print("UARTBaudrate:");
-    Serial.print(uart_bandrate[(int)((responcedata[2]&0b11100000)>>5)]);
+    Serial.print(uart_baudrate[(int)((responcedata[2]&0b11100000)>>5)]);
     Serial.println("bps");
 
     Serial.print("SF:");
@@ -122,10 +122,10 @@ void config_E220::Show(){
     Serial.println("bytes");
 
     Serial.print("RSSINoise:");
-    if(((responcedata[3]&0b00100000)>>5)>0){
-        Serial.println("Available");
-    }else{
+    if(((responcedata[3]&0b00100000)>>5)==0x00){
         Serial.println("Not Available");
+    }else{
+        Serial.println("Available");
     }
 
     Serial.print("TxPower:");
@@ -137,10 +137,10 @@ void config_E220::Show(){
     Serial.println("");
 
     Serial.print("RSSIByte:");
-    if(((responcedata[5]&0b10000000)>>7)>0){
-        Serial.println("Available");
+    if(((responcedata[5]&0b10000000)>>7)==0x00){
+        Serial.println("Not Available");
     }else{
-        Serial.println("UnAvailable");
+        Serial.println("Available");
     }
 
     Serial.print("TxMethod:");
@@ -155,7 +155,6 @@ void config_E220::Show(){
     Serial.println("ms");
 
     Serial.println("-------------------------");
-
 }
 
 //Address=0x02
@@ -264,6 +263,7 @@ void config_E220::SetSubpacketLength(int _sub_length,byte* _set_data_buff){
     case 200:
         _set_data_buff[3]=_set_data_buff[3]&0b00111111;
         _set_data_buff[3]=_set_data_buff[3]|0b00000000;
+        
     case 128:
         _set_data_buff[3]=_set_data_buff[3]&0b00111111;
         _set_data_buff[3]=_set_data_buff[3]|0b01000000;
@@ -281,7 +281,6 @@ void config_E220::SetSubpacketLength(int _sub_length,byte* _set_data_buff){
 void config_E220::SetRssiNoiseAvailable(bool _rssi_available,byte* _set_data_buff){
     if(_rssi_available){
         _set_data_buff[3]=_set_data_buff[3]&0b11011111;
-        _set_data_buff[3]=_set_data_buff[3]|0b00000000; 
     }else{
         _set_data_buff[3]=_set_data_buff[3]&0b11011111;
         _set_data_buff[3]=_set_data_buff[3]|0b00100000; 
@@ -299,6 +298,8 @@ void config_E220::SetTxPower(int _power,byte* _set_data_buff){
         case 0:
             _set_data_buff[3]=_set_data_buff[3]&0b11111100;
             _set_data_buff[3]=_set_data_buff[3]|0b00000011;
+        default:
+            break;
     }
 }
 //0x04

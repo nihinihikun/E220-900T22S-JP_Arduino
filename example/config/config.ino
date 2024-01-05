@@ -33,7 +33,7 @@ void loop(){
         e220conf.Show();
     }
     //bandrate command
-    if(serial_input.startsWith("bandrate ")){
+    if(serial_input.startsWith("baudrate ")){
         int spaceIndex = serial_input.indexOf(' ');
         String baudrateStr = serial_input.substring(spaceIndex + 1);
         int baudrate = baudrateStr.toInt();
