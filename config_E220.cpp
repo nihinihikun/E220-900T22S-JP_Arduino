@@ -104,7 +104,7 @@ void config_E220::Show(){
     byte responcedata[11]={0};
     ReadResister(0x00,11,responcedata);
     Serial.println("------configuration------");
-    Serial.print("Address:");
+    Serial.print("Address(HEX):");
     Serial.print(responcedata[0],HEX);
     Serial.println(responcedata[1],HEX);
 
