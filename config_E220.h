@@ -16,6 +16,7 @@ class config_E220{
         void SetDefault();
         void Show();
 
+        void SetAddress(int _addr,byte* _set_data_buff);
         void SetUartBaudrate(int baudrate,byte* _set_data_buff);
         void SetSF(int sf,byte* _set_data_buff);
         void SetBW(int bw,byte* _set_data_buff);
