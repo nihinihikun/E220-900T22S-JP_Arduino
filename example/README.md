@@ -3,9 +3,9 @@
 ## source
 - config.ino
     - for configuration.
-- test1.ino
-    - when rssi byte is off
-- test2.ino
-    - when rssi byte is on
-- test3.ino
+- hardwareserial.ino
+    - when rssi byte is off,using HardwareSerial
+- softwareserial.ino
+    - when rssi byte is on,using SoftwareSerial
+- VariableLength.ino
     - when you want to specify payload length

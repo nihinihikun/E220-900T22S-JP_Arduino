@@ -1,4 +1,4 @@
-# Communication Usage
+# Communication Usage(HardwareSerial,RSSI-on)
 
 **Attension!**
 - Set M0 and M1 pin to be LOW.(Nomal mode)

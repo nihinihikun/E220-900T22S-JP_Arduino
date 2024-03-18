@@ -1,7 +1,9 @@
-# Communication Usage
+# Communication Usage(HardwareSerial,VariableLength)
 
 **Attension!**
 - Set M0 and M1 pin to be LOW.(Nomal mode)
+- You must set same length between transmission and receiver.
+- Message Length is up to 199 Byte.
 
 ##### define object
 ```
