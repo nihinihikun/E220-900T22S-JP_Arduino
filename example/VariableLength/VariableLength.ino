@@ -9,7 +9,7 @@ int count=0;//for test message
 byte tx_payload[55]={0};
 byte rx_payload[55]={0};
 
-E220 e220(0xFF,0xFF,0x00);//TARGETADRESS=0xFFFF,CHANNEL=0x00
+E220 e220(Serial1,0xFF,0xFF,0x00);//TARGETADRESS=0xFFFF,CHANNEL=0x00
 
 void setup(){
     Serial.begin(9600);
