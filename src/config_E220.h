@@ -3,9 +3,10 @@
 
 class config_E220{
     public:
-        config_E220();
-        config_E220(int M0pin,int M1pin);
-        config_E220(int M0pin,int M1pin,int AUXpin);
+        Stream& serial_e220;
+        config_E220(Stream& serial_e220);
+        config_E220(Stream& serial_e220,int M0pin,int M1pin);
+        config_E220(Stream& serial_e220,int M0pin,int M1pin,int AUXpin);
 
         void GetConfigAll();
 
