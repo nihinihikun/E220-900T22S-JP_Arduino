@@ -12,7 +12,7 @@ E220 e220(Serial1,0xFF,0xFF,0x00);//TARGETADRESS=0xFFFF,CHANNEL=0x00
 
 void setup(){
     Serial.begin(9600);
-    Serial1.begin(9600);//e220 conect to 9600bps
+    Serial1.begin(9600);//e220 conect
     pinMode(M0, OUTPUT);
     pinMode(M1, OUTPUT);
     digitalWrite(M0, LOW);

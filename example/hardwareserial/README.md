@@ -1,13 +1,18 @@
-# Communication Usage
+# Communication Usage(HardwareSerial)
 
 **Attension!**
 - Set M0 and M1 pin to be LOW.(Nomal mode)
+- Arduino UNO Rev3 and other some MCU has no second Serial-port.Check your using MCU datasheet or Arduino Reference.
+
+```
+#include <E220.h>
+```
 
 ##### define object
 ```
-E220 e220(0xFF,0xFF,0x00);
+E220 e220(Serial1,0xFF,0xFF,0x00);
 ```
-- E220(uint8_t tagetaddress1,uint8_t targetaddress2,uint8_t channel)
+- E220(&Stream,uint8_t tagetaddress1,uint8_t targetaddress2,uint8_t channel)
     - tagetaddress1,tagetaddress2
         - target-address
             - ex) target-address=0x00FF,tagetaddress1=0x00,tagetaddress2=0xFF
