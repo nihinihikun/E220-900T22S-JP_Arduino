@@ -7,21 +7,12 @@ int count=0;//for test message
 byte tx_payload[199]={0};
 byte rx_payload[199]={0};
 
-<<<<<<<< Updated upstream:example/hardwareserial/hardwareserial.ino
 E220 e220(Serial1,0xFF,0xFF,0x00);//TARGETADRESS=0xFFFF,CHANNEL=0x00
 
 
 void setup(){
     Serial.begin(9600);
     Serial1.begin(9600);//e220 conect
-========
-E220 e220(Serial1,0xFF,0xFF,0x0A);//TARGETADRESS=0xFFFF,CHANNEL=0x00
-
-void setup(){
-    Serial.begin(9600);
-    Serial1.begin(115200);
-    
->>>>>>>> Stashed changes:example/simpleuse_rssioff/simpleuse_rssioff.ino
     pinMode(M0, OUTPUT);
     pinMode(M1, OUTPUT);
     digitalWrite(M0, LOW);
