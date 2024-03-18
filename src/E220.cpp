@@ -1,10 +1,5 @@
 #include <Arduino.h>
 #include "E220.h"
-E220::E220(uint8_t _target_adress1, uint8_t _target_adress2, uint8_t _channel) {
-    uint8_t target_address_1;
-    uint8_t  target_address_2;
-    uint8_t  channel;
-}
 
 void E220::ResetBuff(byte* _payload){
     for (int i=0; i<199;i++){
@@ -40,7 +35,7 @@ void E220::TransmissionData(byte* _tx_payload) {
     for (int i = 0; i < 199; i++) {
         full_transmission_buffer[i + 1] = _tx_payload[i];
     }
-    Serial1.write(full_transmission_buffer, 200); 
+    serial_e220.write(full_transmission_buffer, 200); 
 }
 
 void E220::TransmissionDataVariebleLength(byte* _tx_payload,int _length) {
@@ -49,17 +44,17 @@ void E220::TransmissionDataVariebleLength(byte* _tx_payload,int _length) {
     for (int i = 0; i < _length; i++) {
         full_transmission_buffer[i + 1] = _tx_payload[i];
     }
-    Serial1.write(full_transmission_buffer, _length+1); 
+    serial_e220.write(full_transmission_buffer, _length+1); 
 }
 
 int E220::ReceiveData(byte* _rx_payload){
     bool isReceived=false;
     int receive_msg_length=0;
-    if(Serial1.available()>0){
+    if(serial_e220.available()>0){
         byte trash[400]={0};
         int nullcount=0;
-        Serial1.readBytesUntil(STARTLETTER,trash,400);
-        Serial1.readBytes(_rx_payload,199);
+        serial_e220.readBytesUntil(STARTLETTER,trash,400);
+        serial_e220.readBytes(_rx_payload,199);
         receive_msg_length=199;
     }else{
         receive_msg_length=0;
@@ -71,13 +66,13 @@ int E220::ReceiveData(byte* _rx_payload){
 int E220::ReceiveData(byte* _rx_payload,int* rssi){
     bool isReceived=false;
     int receive_msg_length=0;
-    if(Serial1.available()>0){
+    if(serial_e220.available()>0){
         byte trash[400]={0};
         int nullcount=0;
-        Serial1.readBytesUntil(STARTLETTER,trash,400);
-        Serial1.readBytes(_rx_payload,199);
+        serial_e220.readBytesUntil(STARTLETTER,trash,400);
+        serial_e220.readBytes(_rx_payload,199);
         delay(1);//wait for rssi culcuration at E220
-        *rssi=-(256-Serial1.read());
+        *rssi=-(256-serial_e220.read());
         // dBm=256-rssi;
         receive_msg_length=199;
     }else{
@@ -90,11 +85,11 @@ int E220::ReceiveData(byte* _rx_payload,int* rssi){
 int E220::ReceiveDataVariebleLength(byte* _rx_payload,int _length){
     bool isReceived=false;
     int receive_msg_length=0;
-    if(Serial1.available()>0){
+    if(serial_e220.available()>0){
         byte trash[400]={0};
         int nullcount=0;
-        Serial1.readBytesUntil(STARTLETTER,trash,400);
-        Serial1.readBytes(_rx_payload,_length+1);
+        serial_e220.readBytesUntil(STARTLETTER,trash,400);
+        serial_e220.readBytes(_rx_payload,_length+1);
         receive_msg_length=_length;
     }else{
         receive_msg_length=0;
@@ -106,13 +101,13 @@ int E220::ReceiveDataVariebleLength(byte* _rx_payload,int _length){
 int E220::ReceiveDataVariebleLength(byte* _rx_payload,int _length,int* rssi){
     bool isReceived=false;
     int receive_msg_length=0;
-    if(Serial1.available()>0){
+    if(serial_e220.available()>0){
         byte trash[400]={0};
         int nullcount=0;
-        Serial1.readBytesUntil(STARTLETTER,trash,400);
-        Serial1.readBytes(_rx_payload,_length+1);
+        serial_e220.readBytesUntil(STARTLETTER,trash,400);
+        serial_e220.readBytes(_rx_payload,_length+1);
         delay(1);//wait for rssi culcuration at E220
-        *rssi=-(256-Serial1.read());
+        *rssi=-(256-serial_e220.read());
         // dBm=256-rssi;
         receive_msg_length=_length;
     }else{

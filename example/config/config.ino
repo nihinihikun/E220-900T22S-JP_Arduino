@@ -8,7 +8,7 @@ byte responcedata[11]={0};
 
 byte set_data_buff[11]={0x00};
 
-config_E220 e220conf(M0,M1);
+config_E220 e220conf(Serial1,M0,M1);
 
 void setup(){
     Serial.begin(9600);

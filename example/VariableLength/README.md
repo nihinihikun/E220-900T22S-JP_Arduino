@@ -1,19 +1,21 @@
-# Communication Usage
+# Communication Usage(HardwareSerial,VariableLength)
 
 **Attension!**
 - Set M0 and M1 pin to be LOW.(Nomal mode)
+- You must set same length between transmission and receiver.
+- Message Length is up to 199 Byte.
 
 ##### define object
 ```
-E220 e220(0xFF,0xFF,0x00);
+E220 e220(Serial1,0xFF,0xFF,0x00);
 ```
-- E220(uint8_t tagetaddress1,uint8_t targetaddress2,uint8_t channel)
+- E220(&Stream,uint8_t tagetaddress1,uint8_t targetaddress2,uint8_t channel)
     - tagetaddress1,tagetaddress2
         - target-address
             - ex) target-address=0x00FF,tagetaddress1=0x00,tagetaddress2=0xFF
         - channel
             - ex) channel=0x01,channel=0x01
-
+            
 ##### Send data
 1. make payload-bytedata
     ```

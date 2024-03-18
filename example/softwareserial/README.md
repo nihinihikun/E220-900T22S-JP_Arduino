@@ -1,13 +1,18 @@
-# Communication Usage
+# Communication Usage(SoftwareSerial)
 
 **Attension!**
 - Set M0 and M1 pin to be LOW.(Nomal mode)
-
+- need include SoftwareSerial.h
+```
+#include <E220.h>
+#include <SoftwareSerial.h>
+```
 ##### define object
 ```
-E220 e220(0xFF,0xFF,0x00);
+SoftwareSerial mySerial(D3, D4); // RX, TX
+E220 e220(mySerial,0xFF,0xFF,0x00);
 ```
-- E220(uint8_t tagetaddress1,uint8_t targetaddress2,uint8_t channel)
+- E220(&Stream,uint8_t tagetaddress1,uint8_t targetaddress2,uint8_t channel)
     - tagetaddress1,tagetaddress2
         - target-address
             - ex) target-address=0x00FF,tagetaddress1=0x00,tagetaddress2=0xFF

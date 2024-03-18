@@ -1,17 +1,17 @@
 #include <Arduino.h>
 #include "config_E220.h"
 //costructors
-config_E220::config_E220(){
+config_E220::config_E220(Stream& serial_e220):serial_e220(serial_e220){
 }
 
-config_E220::config_E220(int M0pin,int M1pin){
+config_E220::config_E220(Stream& serial_e220,int M0pin,int M1pin):serial_e220(serial_e220){
     pinMode(M0pin,OUTPUT);
     pinMode(M1pin,OUTPUT);
     digitalWrite(M0pin,HIGH);
     digitalWrite(M1pin,HIGH);
 }
 
-config_E220::config_E220(int M0pin,int M1pin,int AUXpin){
+config_E220::config_E220(Stream& serial_e220,int M0pin,int M1pin,int AUXpin):serial_e220(serial_e220){
     pinMode(M0pin,OUTPUT);
     pinMode(M1pin,OUTPUT);
     pinMode(AUXpin,INPUT);

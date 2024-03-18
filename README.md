@@ -35,11 +35,13 @@ If you want to get details, see datasheet.
 
 ### Examples
 - config.ino
-    - If you change hardware-configuration, use this file.
-- test1.ino
-    - example when rssi-byte off.
-- test2.ino
-    - example when rssi-byte on.
+    - for configuration.
+- hardwareserial.ino
+    - when rssi byte is off,using HardwareSerial
+- softwareserial.ino
+    - when rssi byte is on,using SoftwareSerial
+- VariableLength.ino
+    - when you want to specify payload length
 
 ## Usage
 See each README.md in each folder.
