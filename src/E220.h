@@ -5,8 +5,15 @@
 class E220{
     public:
         Stream& serial_e220;
+<<<<<<< Updated upstream
         E220(Stream& serial_e220, uint8_t _target_adress1, uint8_t _target_adress2, uint8_t _channel): serial_e220(serial_e220), target_address_1(_target_adress1), target_address_2(_target_adress2), channel(_channel) {};
 
+=======
+        uint8_t target_address_1;
+        uint8_t  target_address_2;
+        uint8_t  channel;
+        E220(Stream& serial, uint8_t _target_adress1, uint8_t _target_adress2, uint8_t _channel): serial_e220(serial_e220), target_address_1(_target_adress1), target_address_2(_target_adress2), channel(_channel) {};
+>>>>>>> Stashed changes
         void ResetBuff(byte* _payload);
         void ResetBuff(byte* _payload,int _length);
         void GenerateTestMsg(byte* _payload, int count);
@@ -18,8 +25,5 @@ class E220{
         int ReceiveDataVariebleLength(byte* _rx_payload,int _length);
         int ReceiveDataVariebleLength(byte* _rx_payload,int _length,int* rssi);
     private:
-        uint8_t target_address_1;
-        uint8_t  target_address_2;
-        uint8_t  channel;
 };
 #endif
