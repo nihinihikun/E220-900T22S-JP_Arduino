@@ -4,7 +4,6 @@
 
 class E220{
     public:
-        // E220(uint8_t _target_adress1, uint8_t _target_adress2, uint8_t _channel);
         Stream& serial_e220;
         E220(Stream& serial_e220, uint8_t _target_adress1, uint8_t _target_adress2, uint8_t _channel): serial_e220(serial_e220), target_address_1(_target_adress1), target_address_2(_target_adress2), channel(_channel) {};
 

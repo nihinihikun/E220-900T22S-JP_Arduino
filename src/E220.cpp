@@ -1,10 +1,5 @@
 #include <Arduino.h>
 #include "E220.h"
-// E220::E220(uint8_t _target_adress1, uint8_t _target_adress2, uint8_t _channel) {
-    // uint8_t target_address_1;
-    // uint8_t  target_address_2;
-    // uint8_t  channel;
-// }
 
 void E220::ResetBuff(byte* _payload){
     for (int i=0; i<199;i++){
