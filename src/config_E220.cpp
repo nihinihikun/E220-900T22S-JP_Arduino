@@ -26,20 +26,20 @@ int config_E220::ReadResister(byte starting_addr,byte _length,byte* _responcedat
     set_data[0]=0xc1;
     set_data[1]=starting_addr;
     set_data[2]=_length;
-    _length=Serial1.write(set_data, 3);
+    _length=serial_e220.write(set_data, 3);
     delay(500);
 
-    if(Serial1.available()){
+    if(serial_e220.available()){
         int starting_addr_res=0;
         int length_res=0;
-        Serial1.readBytesUntil(0xc1,trash,100);
-        starting_addr_res=(int)Serial1.read();
-        length_res=(int)Serial1.read();
-        Serial1.readBytes(_responcedata,length_res);
+        serial_e220.readBytesUntil(0xc1,trash,100);
+        starting_addr_res=(int)serial_e220.read();
+        length_res=(int)serial_e220.read();
+        serial_e220.readBytes(_responcedata,length_res);
         // Serial.write(_responcedata,length_res);
         return length_res;
     }else{
-        Serial.println("Serial1 no response");
+        Serial.println("serial_e220 no response");
         return 0;
     }
 }
@@ -54,14 +54,14 @@ int config_E220::WriteResister(byte starting_addr,byte _length,byte* _data){
     for(int i=0;i<(int)_length;i++){
         set_data[i+3]=_data[i];
     }
-    Serial1.write(set_data, _length+3);   
+    serial_e220.write(set_data, _length+3);   
     
     delay(500);
     int responce_length=0;
-    if(Serial1.available()){
-        Serial1.readBytesUntil(0xC1,trash,100);
-        responce_length=Serial1.read();
-        Serial1.readBytes(responcedata,responce_length);
+    if(serial_e220.available()){
+        serial_e220.readBytesUntil(0xC1,trash,100);
+        responce_length=serial_e220.read();
+        serial_e220.readBytes(responcedata,responce_length);
         // Serial.write(responcedata,length);
         return responce_length;
     }else{
@@ -80,14 +80,14 @@ int config_E220::SetTemporaryResister(byte starting_addr,byte _length,byte* _dat
     for(int i=0;i<_length;i++){
         set_data[i+3]=_data[i];
     }
-    Serial1.write(set_data, _length+3);   
+    serial_e220.write(set_data, _length+3);   
     
     delay(500);
     int responce_length=0;
-    if(Serial1.available()){
-        Serial1.readBytesUntil(0xc1,trash,100);
-        responce_length=Serial1.read();
-        Serial1.readBytes(responcedata,responce_length);
+    if(serial_e220.available()){
+        serial_e220.readBytesUntil(0xc1,trash,100);
+        responce_length=serial_e220.read();
+        serial_e220.readBytes(responcedata,responce_length);
         return responce_length;
     }else{
         // Serial.println("no response");
@@ -97,7 +97,7 @@ int config_E220::SetTemporaryResister(byte starting_addr,byte _length,byte* _dat
 
 //commands
 void config_E220::SetDefault(){
-    Serial1.write(default_config_data, 11);
+    serial_e220.write(default_config_data, 11);
 }
 
 void config_E220::Show(){
