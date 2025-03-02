@@ -166,8 +166,8 @@ void config_E220::SetAddress(int _addr,byte* _set_data_buff){
     if(_addr<0){
         // Serial.print("error:address<0");
     }else if(_addr<256){
-        _set_data_buff[0]=_addr;
-        _set_data_buff[1]=0;
+        _set_data_buff[0]=0;
+        _set_data_buff[1]=_addr;
     }else if(_addr<65536){
         _set_data_buff[0]=_addr/256;
         _set_data_buff[1]=_addr%256;
