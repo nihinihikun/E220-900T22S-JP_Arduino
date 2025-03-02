@@ -89,7 +89,7 @@ int E220::ReceiveDataVariebleLength(byte* _rx_payload,int _length){
         byte trash[400]={0};
         int nullcount=0;
         serial_e220.readBytesUntil(STARTLETTER,trash,400);
-        serial_e220.readBytes(_rx_payload,_length+1);
+        serial_e220.readBytes(_rx_payload,_length);
         receive_msg_length=_length;
     }else{
         receive_msg_length=0;
@@ -105,7 +105,7 @@ int E220::ReceiveDataVariebleLength(byte* _rx_payload,int _length,int* rssi){
         byte trash[400]={0};
         int nullcount=0;
         serial_e220.readBytesUntil(STARTLETTER,trash,400);
-        serial_e220.readBytes(_rx_payload,_length+1);
+        serial_e220.readBytes(_rx_payload,_length);
         delay(1);//wait for rssi culcuration at E220
         *rssi=-(256-serial_e220.read());
         // dBm=256-rssi;
