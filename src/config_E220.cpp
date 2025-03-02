@@ -281,16 +281,19 @@ void config_E220::SetSubpacketLength(int _sub_length,byte* _set_data_buff){
     case 200:
         _set_data_buff[3]=_set_data_buff[3]&0b00111111;
         _set_data_buff[3]=_set_data_buff[3]|0b00000000;
-        
+        break;
     case 128:
         _set_data_buff[3]=_set_data_buff[3]&0b00111111;
         _set_data_buff[3]=_set_data_buff[3]|0b01000000;
+        break;
     case 64:
         _set_data_buff[3]=_set_data_buff[3]&0b00111111;
         _set_data_buff[3]=_set_data_buff[3]|0b10000000;
+        break;
     case 32:
         _set_data_buff[3]=_set_data_buff[3]&0b00111111;
         _set_data_buff[3]=_set_data_buff[3]|0b11000000;
+        break;
     default:
         break;
     }
@@ -310,12 +313,15 @@ void config_E220::SetTxPower(int _power,byte* _set_data_buff){
         case 13:
             _set_data_buff[3]=_set_data_buff[3]&0b11111100;
             _set_data_buff[3]=_set_data_buff[3]|0b00000001;
+            break;
         case 7:
             _set_data_buff[3]=_set_data_buff[3]&0b11111100;
             _set_data_buff[3]=_set_data_buff[3]|0b00000010;
+            break;
         case 0:
             _set_data_buff[3]=_set_data_buff[3]&0b11111100;
             _set_data_buff[3]=_set_data_buff[3]|0b00000011;
+            break;
         default:
             break;
     }
