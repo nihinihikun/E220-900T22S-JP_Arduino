@@ -349,10 +349,10 @@ void config_E220::SetRssiByteAvailable(bool _rssi_byte_available,byte* _set_data
 void config_E220::SetTxMethod(bool _fixed,byte* _set_data_buff){
     if(_fixed){//Transeparent mode
         _set_data_buff[5]=_set_data_buff[5]&0b10111111;
-        _set_data_buff[5]=_set_data_buff[5]|0b00000000;
+        _set_data_buff[5]=_set_data_buff[5]|0b01000000;
     }else{//fixed mode
         _set_data_buff[5]=_set_data_buff[5]&0b10111111;
-        _set_data_buff[5]=_set_data_buff[5]|0b01000000;
+        _set_data_buff[5]=_set_data_buff[5]|0b00000000;
     }
 
 }
