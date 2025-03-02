@@ -302,9 +302,10 @@ void config_E220::SetSubpacketLength(int _sub_length,byte* _set_data_buff){
 void config_E220::SetRssiNoiseAvailable(bool _rssi_available,byte* _set_data_buff){
     if(_rssi_available){
         _set_data_buff[3]=_set_data_buff[3]&0b11011111;
+        _set_data_buff[3]=_set_data_buff[3]|0b00100000;
     }else{
         _set_data_buff[3]=_set_data_buff[3]&0b11011111;
-        _set_data_buff[3]=_set_data_buff[3]|0b00100000; 
+        _set_data_buff[3]=_set_data_buff[3]|0b00000000;
     }
 }
 
@@ -336,12 +337,12 @@ void config_E220::SetChannel(int _channel,byte* _set_data_buff){
 }
 //0x05
 void config_E220::SetRssiByteAvailable(bool _rssi_byte_available,byte* _set_data_buff){
-    if(!_rssi_byte_available){
-        _set_data_buff[5]=_set_data_buff[5]&0b01111111;
-        _set_data_buff[5]=_set_data_buff[5]|0b00000000;
-    }else{
+    if(_rssi_byte_available){
         _set_data_buff[5]=_set_data_buff[5]&0b01111111;
         _set_data_buff[5]=_set_data_buff[5]|0b10000000;
+    }else{
+        _set_data_buff[5]=_set_data_buff[5]&0b01111111;
+        _set_data_buff[5]=_set_data_buff[5]|0b00000000;
     }
 }
 
