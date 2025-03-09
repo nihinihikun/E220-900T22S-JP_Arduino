@@ -37,7 +37,7 @@ class config_E220{
         uint32_t sf[8]={5,6,7,8,9,10,11,12};
         uint32_t bw[3]={125,250,500};
         uint32_t subpacket_length[4]={200,128,64,32};
-        uint32_t tx_power[4]={NULL,13,7,0};
+        uint32_t tx_power[4]={0xffffffff,13,7,0};
         uint32_t wor_cycle[8]={500,1000,1500,2000,2500,3000,3500,4000};
 
         

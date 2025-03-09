@@ -11,12 +11,12 @@ class E220{
         void ResetBuff(byte* _payload,int _length);
         void GenerateTestMsg(byte* _payload, int count);
         void GenerateTestMsg_2(byte* _payload, int count,int _length);
-        void TransmissionData(byte* _tx_payload);
+        
         void TransmissionDataVariebleLength(byte* _tx_payload,int _length);
-        int ReceiveData(byte* _rx_payload);
-        int ReceiveData(byte* _rx_payload,int* rssi);
-        int ReceiveDataVariebleLength(byte* _rx_payload,int _length);
-        int ReceiveDataVariebleLength(byte* _rx_payload,int _length,int* rssi);
+        int ReceiveDataVariebleLength(byte* _rx_payload,int _length,int* rssi = nullptr);
+
+        inline void TransmissionData(byte* _tx_payload) {TransmissionDataVariebleLength(_tx_payload,199);}
+        inline int ReceiveData(byte* _rx_payload,int* rssi = nullptr) {return ReceiveDataVariebleLength(_rx_payload,199,rssi);}
     private:
         uint8_t target_address_1;
         uint8_t target_address_2;

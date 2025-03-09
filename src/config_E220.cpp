@@ -104,9 +104,9 @@ void config_E220::Show(){
     byte responcedata[11]={0};
     ReadResister(0x00,11,responcedata);
     Serial.println("------configuration------");
-    Serial.print("Address(HEX):");
-    Serial.print(responcedata[0],HEX);
-    Serial.println(responcedata[1],HEX);
+    Serial.print("Address(HEX): 0x");
+    if (responcedata[0] < 16) { Serial.print("0"); } Serial.print(responcedata[0], HEX);
+    if (responcedata[1] < 16) { Serial.print("0"); } Serial.println(responcedata[1], HEX);
 
 
     Serial.print("UARTBaudrate:");
@@ -166,7 +166,8 @@ void config_E220::SetAddress(int _addr,byte* _set_data_buff){
     if(_addr<0){
         // Serial.print("error:address<0");
     }else if(_addr<256){
-        _set_data_buff[0]=_addr;
+        _set_data_buff[0]=0;
+        _set_data_buff[1]=_addr;
     }else if(_addr<65536){
         _set_data_buff[0]=_addr/256;
         _set_data_buff[1]=_addr%256;
@@ -281,16 +282,19 @@ void config_E220::SetSubpacketLength(int _sub_length,byte* _set_data_buff){
     case 200:
         _set_data_buff[3]=_set_data_buff[3]&0b00111111;
         _set_data_buff[3]=_set_data_buff[3]|0b00000000;
-        
+        break;
     case 128:
         _set_data_buff[3]=_set_data_buff[3]&0b00111111;
         _set_data_buff[3]=_set_data_buff[3]|0b01000000;
+        break;
     case 64:
         _set_data_buff[3]=_set_data_buff[3]&0b00111111;
         _set_data_buff[3]=_set_data_buff[3]|0b10000000;
+        break;
     case 32:
         _set_data_buff[3]=_set_data_buff[3]&0b00111111;
         _set_data_buff[3]=_set_data_buff[3]|0b11000000;
+        break;
     default:
         break;
     }
@@ -299,9 +303,10 @@ void config_E220::SetSubpacketLength(int _sub_length,byte* _set_data_buff){
 void config_E220::SetRssiNoiseAvailable(bool _rssi_available,byte* _set_data_buff){
     if(_rssi_available){
         _set_data_buff[3]=_set_data_buff[3]&0b11011111;
+        _set_data_buff[3]=_set_data_buff[3]|0b00100000;
     }else{
         _set_data_buff[3]=_set_data_buff[3]&0b11011111;
-        _set_data_buff[3]=_set_data_buff[3]|0b00100000; 
+        _set_data_buff[3]=_set_data_buff[3]|0b00000000;
     }
 }
 
@@ -310,12 +315,15 @@ void config_E220::SetTxPower(int _power,byte* _set_data_buff){
         case 13:
             _set_data_buff[3]=_set_data_buff[3]&0b11111100;
             _set_data_buff[3]=_set_data_buff[3]|0b00000001;
+            break;
         case 7:
             _set_data_buff[3]=_set_data_buff[3]&0b11111100;
             _set_data_buff[3]=_set_data_buff[3]|0b00000010;
+            break;
         case 0:
             _set_data_buff[3]=_set_data_buff[3]&0b11111100;
             _set_data_buff[3]=_set_data_buff[3]|0b00000011;
+            break;
         default:
             break;
     }
@@ -330,22 +338,22 @@ void config_E220::SetChannel(int _channel,byte* _set_data_buff){
 }
 //0x05
 void config_E220::SetRssiByteAvailable(bool _rssi_byte_available,byte* _set_data_buff){
-    if(!_rssi_byte_available){
-        _set_data_buff[5]=_set_data_buff[5]&0b01111111;
-        _set_data_buff[5]=_set_data_buff[5]|0b00000000;
-    }else{
+    if(_rssi_byte_available){
         _set_data_buff[5]=_set_data_buff[5]&0b01111111;
         _set_data_buff[5]=_set_data_buff[5]|0b10000000;
+    }else{
+        _set_data_buff[5]=_set_data_buff[5]&0b01111111;
+        _set_data_buff[5]=_set_data_buff[5]|0b00000000;
     }
 }
 
 void config_E220::SetTxMethod(bool _fixed,byte* _set_data_buff){
     if(_fixed){//Transeparent mode
         _set_data_buff[5]=_set_data_buff[5]&0b10111111;
-        _set_data_buff[5]=_set_data_buff[5]|0b00000000;
+        _set_data_buff[5]=_set_data_buff[5]|0b01000000;
     }else{//fixed mode
         _set_data_buff[5]=_set_data_buff[5]&0b10111111;
-        _set_data_buff[5]=_set_data_buff[5]|0b01000000;
+        _set_data_buff[5]=_set_data_buff[5]|0b00000000;
     }
 
 }
